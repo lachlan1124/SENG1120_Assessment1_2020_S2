@@ -11,17 +11,27 @@
 
 class LinkedList
 {
+
+    typedef std::string valueType;
+
     public:
+
+        LinkedList();
+
+        ~LinkedList();
 
         // Precondition.
         // Postcondition.
-        void add(std::string toAdd);
+        void add(valueType toAdd);
 
-        void remove(std::string toRemove);
+        void remove(valueType toRemove);
 
         void sort();
 
+        int count(valueType toCount);
+
         // Operator Overloads:
+        void operator +=(const LinkedList& ll);
 
     private:
 
