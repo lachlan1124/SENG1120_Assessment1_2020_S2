@@ -30,6 +30,8 @@ class Node
 
         void setData(const valueType& d);
 
+        valueType getData();
+
         void test();
 
     private:

@@ -8,7 +8,7 @@
 #define GAURD_LINKEDLIST
 
 #include <iostream>
-
+#include "Node.h"
 class LinkedList
 {
 
@@ -33,9 +33,15 @@ class LinkedList
         // Operator Overloads:
         void operator +=(const LinkedList& ll);
 
+        valueType out() const;
+
     private:
+        Node* head;
+        Node* tail;
+        Node* current;
 
-
+        int size;
+        
 };
 
 
