@@ -21,7 +21,12 @@ void LinkedList::reset()
 	current = head;
 }
 
-void LinkedList::add(valueType toAdd)
+LinkedList::valueType LinkedList::split(valueType string)
+{
+	
+}
+
+void LinkedList::addToHead(valueType toAdd)
 {
 
 	if (size == 0) // if there are no other nodes
@@ -45,13 +50,10 @@ void LinkedList::add(valueType toAdd)
 	}
 	
 
-	head = new Node(toAdd, head, NULL ); // create a new node in the list
+}
 
-	current = head->getNext(); // set the current pointer to the old head
-
-	current->setPrev(head); // like the current node to the head
-
-	current = head; // reset the current pointer
+void LinkedList::add(valueType toAdd)
+{
 
 }
 
@@ -67,7 +69,7 @@ void LinkedList::sort()
 
 int LinkedList::count(valueType toCount)
 {
-
+	return	0;
 }
 
 void LinkedList::operator +=(const LinkedList& ll)
@@ -82,10 +84,10 @@ LinkedList::valueType LinkedList::out()
 
 	for(int i = 0; i < size; i++)
 	{
-		current = current->getNext();
+
 		std::cout << current << " " << current->getData() << " " <<  i << std::endl;
 		output.append(" " + current->getData());
-
+		current = current->getNext();
 
 	}
 	

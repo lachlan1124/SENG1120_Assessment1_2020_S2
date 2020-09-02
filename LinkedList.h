@@ -24,6 +24,8 @@ class LinkedList
         // Postcondition.
         void add(valueType toAdd);
 
+        void addToHead(valueType toAdd);
+
         void remove(valueType toRemove);
 
         void sort();
@@ -31,6 +33,8 @@ class LinkedList
         int count(valueType toCount);
 
         void reset();
+
+        valueType split(valueType string);
 
         valueType out();
 

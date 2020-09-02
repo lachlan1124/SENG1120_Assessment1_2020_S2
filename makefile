@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++98 
+CFLAGS=-c -Wall -std=c++98 -g
 LDFLAGS=
 SOURCES= test.cpp LinkedList.cpp Node.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

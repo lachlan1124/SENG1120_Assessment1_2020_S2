@@ -20,7 +20,7 @@ int main()
 
     testList->add("test1");
 
-    //testList->add("test2");
+    testList->add("test2");
 
 
 
