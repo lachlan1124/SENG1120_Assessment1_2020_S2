@@ -30,10 +30,14 @@ class LinkedList
 
         int count(valueType toCount);
 
+        void reset();
+
+        valueType out();
+
         // Operator Overloads:
         void operator +=(const LinkedList& ll);
 
-        valueType out() const;
+        
 
     private:
         Node* head;
@@ -41,11 +45,13 @@ class LinkedList
         Node* current;
 
         int size;
+
+        
         
 };
 
 
-    std::ostream& operator <<(std::ostream& os, const LinkedList& li);
+    std::ostream& operator <<(std::ostream& os, LinkedList& li);
 
 
 #endif

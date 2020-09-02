@@ -14,20 +14,16 @@ int main()
 
     //delete testNode;
 
-    std::cout << "A" << std::endl;
 
     LinkedList* testList = new LinkedList();
 
-    std::cout << "E" << std::endl;
 
-    testList->add("test1"); // causing seg fault | probs error with reassign the pointers
-    std::cout << "B" << std::endl;
-    testList->add("test2");
+    testList->add("test1");
 
-std::cout << "C" << std::endl;
+    //testList->add("test2");
+
+
 
     std::cout << *testList << std::endl;
-
-    std::cout << "D" << std::endl;
 
 }
