@@ -24,7 +24,7 @@ class LinkedList
         // Postcondition.
         void add(valueType toAdd);
 
-        void addToHead(valueType toAdd);
+        void addToTail(valueType toAdd);
 
         void remove(valueType toRemove);
 
@@ -34,12 +34,16 @@ class LinkedList
 
         void reset();
 
-        valueType split(valueType string);
-
         valueType out();
 
+        valueType getCurrentData();
+
+        void nextCurrent();
+
+        bool atEnd();
+
         // Operator Overloads:
-        void operator +=(const LinkedList& ll);
+        void operator +=( LinkedList& ll);
 
         
 

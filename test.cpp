@@ -15,15 +15,26 @@ int main()
     //delete testNode;
 
 
-    LinkedList* testList = new LinkedList();
+    LinkedList testList;
 
 
-    testList->add("test1");
+    testList.addToTail("test1");
 
-    testList->add("test2");
+    testList.addToTail("test2");
 
+    testList.add("Word1 Word2 Word3 Word4");
+    
+    std::cout << testList << std::endl;
 
+    LinkedList testList2;
 
-    std::cout << *testList << std::endl;
+    testList2.add("List1 List2 List3 List4");
+
+    std::cout << testList2 << std::endl;
+
+    testList += testList2;
+
+    std::cout << testList << std::endl;
+    std::cout << testList2 << std::endl;
 
 }

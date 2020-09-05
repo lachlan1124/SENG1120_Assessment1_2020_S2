@@ -7,6 +7,9 @@
 #include "LinkedList.h"
 #include "Node.h"
 
+#include <sstream> // CHECK I CAN USE THIS
+
+
 LinkedList::LinkedList()
 {
 	head = NULL;
@@ -16,17 +19,17 @@ LinkedList::LinkedList()
 	size = 0;
 }
 
+LinkedList::~LinkedList()
+{
+
+}
+
 void LinkedList::reset()
 {
 	current = head;
 }
 
-LinkedList::valueType LinkedList::split(valueType string)
-{
-	
-}
-
-void LinkedList::addToHead(valueType toAdd)
+void LinkedList::addToTail(valueType toAdd)
 {
 
 	if (size == 0) // if there are no other nodes
@@ -38,13 +41,13 @@ void LinkedList::addToHead(valueType toAdd)
 		}
 	else
 	{
-		current = new Node(toAdd);
+		current = new Node(toAdd, NULL, tail);
 
-		
-		current->setNext(head);
-		head->setPrev(current);
+		tail->setNext(current);
 
-		head = current;
+		tail = current;
+
+		reset();
 
 		size++;
 	}
@@ -55,11 +58,40 @@ void LinkedList::addToHead(valueType toAdd)
 void LinkedList::add(valueType toAdd)
 {
 
+	std::istringstream ss(toAdd);
+
+	while(ss) // while there are words left in string
+	{
+		std::string word;
+
+		ss >> word; // get word from string stream
+
+		addToTail(word); // add word to tail of the linked list
+	}
+
+}
+
+LinkedList::valueType LinkedList::getCurrentData()
+{
+	return current->getData();
+}
+
+void LinkedList::nextCurrent()
+{
+	current = current->getNext();
+}
+
+bool LinkedList::atEnd()
+{
+	if (current->getNext() == NULL)
+		return true;
+	else
+		return false;
 }
 
 void LinkedList::remove(valueType toRemove)
 {
-
+	
 }
 
 void LinkedList::sort()
@@ -72,8 +104,19 @@ int LinkedList::count(valueType toCount)
 	return	0;
 }
 
-void LinkedList::operator +=(const LinkedList& ll)
+void LinkedList::operator +=(LinkedList& ll)
 {
+	//ensure the LL current pointers are at the head
+	reset();
+	ll.reset();
+
+	while(!ll.atEnd()) // while there are more nodes
+	{
+		addToTail(ll.getCurrentData()); // add current data to LinkedList
+
+		ll.nextCurrent(); // increment the ll
+	}
+
 
 }
 
@@ -85,8 +128,8 @@ LinkedList::valueType LinkedList::out()
 	for(int i = 0; i < size; i++)
 	{
 
-		std::cout << current << " " << current->getData() << " " <<  i << std::endl;
-		output.append(" " + current->getData());
+		//std::cout << current << " " << current->getData() << " " <<  i << std::endl;
+		output.append( current->getData() + " " );
 		current = current->getNext();
 
 	}
