@@ -15,6 +15,11 @@ Node::Node(const valueType& d, Node* n, Node* p)
     prev = p;
 }
 
+Node::~Node()
+{
+    
+}
+
 
 void Node::setNext(Node* n)
 {

@@ -66,7 +66,11 @@ void LinkedList::add(valueType toAdd)
 
 		ss >> word; // get word from string stream
 
-		addToTail(word); // add word to tail of the linked list
+		if (word != "") // if the word has a value
+		{
+			addToTail(word); // add word to tail of the linked list
+		}
+
 	}
 
 }
@@ -91,7 +95,39 @@ bool LinkedList::atEnd()
 
 void LinkedList::remove(valueType toRemove)
 {
-	
+	reset(); // sets the current pointer to the head of the linked list
+
+	int ammountRemoved = 0;
+
+	for(int i = 0; i < size; i++)
+	{
+		
+
+		if (current->getData() == toRemove) // if search is a match delete node
+			{
+				Node* nodeDelete = current; // store the location of the node to be delete.
+
+				current = current->getPrev(); // move back in the list 
+
+				current->setNext(nodeDelete->getNext()); // remove the link between the current node and the node to be deleted
+
+				current = current->getNext(); // move forward in the list | Note: nodeDelete will be skipped cause the link was removed above
+
+				current->setPrev(nodeDelete->getPrev()); // remove the link between the current node and the node to be delete | the node has now been removed from list
+
+				delete nodeDelete; // deallocate the memory assigned to the node
+
+				ammountRemoved++; // store the size decrease of the linked list
+
+			}
+			else // contine to the next node
+			{
+				current = current->getNext(); 
+			}
+			
+	}
+
+	size -= ammountRemoved;
 }
 
 void LinkedList::sort()

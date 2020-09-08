@@ -32,9 +32,15 @@ int main()
 
     std::cout << testList2 << std::endl;
 
-    testList += testList2;
+    testList += testList2; // is causing the creation of an empty node
 
     std::cout << testList << std::endl;
     std::cout << testList2 << std::endl;
 
+    testList.add("Word3 Word3 Word8");
+
+    testList.remove("Word3");
+
+    std::cout << testList << std::endl;
+    std::cout << testList2 << std::endl;
 }
