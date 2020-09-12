@@ -143,24 +143,28 @@ void LinkedList::sort()
 
 	for(int i = 0; i < size; i++) // for each item in the list
 	{
-		if(current->getData() > current->getNext()->getData()) //if current next is larger then current swap them
+
+		Node* l = current->getNext(); // points to current->getNext() B
+		Node* j = l->getNext(); // points to l->getNext(); C
+		Node* k = current->getPrev(); // points to current->getPrev 
+		
+		if(l != NULL)
+			if(current->getData() > l->getData()) //if current next is larger then current swap them
 			{
-				Node* i = current->getNext(); // points to current->getNext() B
-				Node* j = i->getNext(); // points to i->getNext(); C
-				Node* k = current->getPrev(); // points to current->getPrev 
+
 
 				if (k == NULL) // checks if k needs to be linked back
 				{
-					i->setPrev(NULL);
+					l->setPrev(NULL);
 				}
 				else // link back
 				{
-					i->setPrev(k);
-					k->setNext(i);
+					l->setPrev(k);
+					k->setNext(l);
 				}
 				
-				current->setPrev(i);
-				i->setNext(current);
+				current->setPrev(l);
+				l->setNext(current);
 
 				if (j == NULL) // checks if j needs to be linked back
 				{
@@ -175,7 +179,7 @@ void LinkedList::sort()
 				swapped = true;
 			}
 
-			current = current->getNext();
+		current = current->getNext();
 	}
 
 
