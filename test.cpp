@@ -37,10 +37,20 @@ int main()
     std::cout << testList << std::endl;
     std::cout << testList2 << std::endl;
 
-    testList.add("Word3 Word3 Word8");
-
     testList.remove("Word3");
 
     std::cout << testList << std::endl;
     std::cout << testList2 << std::endl;
+
+    std::cout << testList.count("Word2") << std::endl;
+
+    LinkedList sortList1;
+
+    sortList1.add("D E A C B F");
+
+    std::cout << sortList1 << std::endl;
+
+    sortList1.sort();
+
+    std::cout << sortList1 << std::endl;
 }

@@ -7,7 +7,7 @@
 #include "LinkedList.h"
 #include "Node.h"
 
-#include <sstream> // CHECK I CAN USE THIS
+#include <sstream>
 
 
 LinkedList::LinkedList()
@@ -85,7 +85,12 @@ void LinkedList::nextCurrent()
 	current = current->getNext();
 }
 
-bool LinkedList::atEnd()
+void LinkedList::prevCurrent()
+{
+	current = current->getPrev();
+}
+
+bool LinkedList::atEnd() const
 {
 	if (current->getNext() == NULL)
 		return true;
@@ -132,12 +137,70 @@ void LinkedList::remove(valueType toRemove)
 
 void LinkedList::sort()
 {
-            
+	bool swapped;
+
+	reset(); // set current to head
+
+	for(int i = 0; i < size; i++) // for each item in the list
+	{
+		if(current->getData() > current->getNext()->getData()) //if current next is larger then current swap them
+			{
+				Node* i = current->getNext(); // points to current->getNext() B
+				Node* j = i->getNext(); // points to i->getNext(); C
+				Node* k = current->getPrev(); // points to current->getPrev 
+
+				if (k == NULL) // checks if k needs to be linked back
+				{
+					i->setPrev(NULL);
+				}
+				else // link back
+				{
+					i->setPrev(k);
+					k->setNext(i);
+				}
+				
+				current->setPrev(i);
+				i->setNext(current);
+
+				if (j == NULL) // checks if j needs to be linked back
+				{
+					current->setNext(NULL);
+				}
+				else // link back
+				{
+					current->setNext(j);
+					j->setPrev(current);
+				}
+				
+				swapped = true;
+			}
+
+			current = current->getNext();
+	}
+
+
+	if (swapped) // if an item was swapped run sort again.
+		sort();
+
+
 }
 
 int LinkedList::count(valueType toCount)
 {
-	return	0;
+	reset(); // set current to head
+	
+	int i = 0;
+	
+	for (int j = 0; j < size; j++) // for each item in list
+		{
+			if(current->getData() == toCount) // if search matches
+				i++; // increment count
+
+			current = current->getNext(); // move to next node
+		}
+
+	
+	return	i; // return counted ammount
 }
 
 void LinkedList::operator +=(LinkedList& ll)

@@ -40,7 +40,9 @@ class LinkedList
 
         void nextCurrent();
 
-        bool atEnd();
+        void prevCurrent();
+
+        bool atEnd() const;
 
         // Operator Overloads:
         void operator +=( LinkedList& ll);
