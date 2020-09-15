@@ -9,17 +9,19 @@
 
 #include <sstream>
 
-
+// constructor for LinkedList class
 LinkedList::LinkedList()
 {
-	head = NULL;
-	tail = NULL;
-	current = NULL;
+	head = NULL; // head default value
+	tail = NULL; // tail default value
+	current = NULL; // current default value
 	
-	size = 0;
+	size = 0; // size of list when first initialized
 }
 
-LinkedList::~LinkedList()
+
+// destructor for LinkedList
+LinkedList::~LinkedList() 
 {
 	reset(); // sets current to head
 
@@ -44,23 +46,25 @@ void LinkedList::addToTail(const valueType toAdd)
 {
 
 	if (size == 0) // if there are no other nodes
-		{
-			head = new Node(toAdd); // create new node and point head at it
-			tail = head; // aslo point tail at it
-			current = head;
-			size = 1; // increment the size
-		}
+	{
+		head = new Node(toAdd); // create new node and point head at it
+		tail = head; // aslo point tail at it
+		reset();
+
+
+		size = 1; // set list size to 0
+	}
 	else
 	{
-		current = new Node(toAdd, NULL, tail);
+		current = new Node(toAdd, NULL, tail); // point current to a new Node with the data value of toAdd next to NULL and tail to Prev
 
-		tail->setNext(current);
+		tail->setNext(current); // Link current to the tail
 
-		tail = current;
+		tail = current; // move the tail to the new end of the linked list
 
 		reset();
 
-		size++;
+		size++; // increment the size of the list
 	}
 	
 
@@ -75,7 +79,7 @@ void LinkedList::add(const valueType toAdd)
 
 	while(ss) // while there are words left in string
 	{
-		std::string word;
+		std::string word; // has to be a string
 
 		ss >> word; // get word from string stream
 
@@ -113,8 +117,8 @@ void LinkedList::prevCurrent()
 // test to see if current is at the end of the LinkedList
 bool LinkedList::atEnd() const
 {
-	if (current == NULL)
-		return true;
+	if (current == NULL) // if the current pointer is null
+		return true; // the return that we are at the end of list
 	else
 		return false;
 }
@@ -194,7 +198,7 @@ void LinkedList::remove(const valueType toRemove)
 // Sorts the LinkedList use a bubblesort
 void LinkedList::sort()
 {
-	bool swapped;
+	bool swapped; // bool to test if the sort swapped somthing
 
 
 	reset(); // set current to head
@@ -219,7 +223,7 @@ void LinkedList::sort()
 
 		}
 
-		nextCurrent();
+		nextCurrent(); // incremetns current pointer
 	}
 
 
