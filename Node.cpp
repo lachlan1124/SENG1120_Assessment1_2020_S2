@@ -47,14 +47,8 @@ void Node::setData(const valueType& d)
     data = d;
 }
 
-Node::valueType Node::getData()
+Node::valueType Node::getData() const
 {
     return data;
 }
 
-
-void Node::test()
-{
-    std::cout << &data << ": " << data << std::endl;
-    std::cout << &next << ": " << next << std::endl;
-}

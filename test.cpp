@@ -18,10 +18,6 @@ int main()
     LinkedList testList;
 
 
-    testList.addToTail("test1");
-
-    testList.addToTail("test2");
-
     testList.add("Word1 Word2 Word3 Word4");
     
     std::cout << testList << std::endl;
@@ -51,6 +47,10 @@ int main()
     std::cout << sortList1 << std::endl;
 
     sortList1.sort();
+
+    std::cout << sortList1 << std::endl;
+
+    sortList1.remove("F");
 
     std::cout << sortList1 << std::endl;
 }

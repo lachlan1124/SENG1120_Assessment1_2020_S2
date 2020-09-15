@@ -2,7 +2,7 @@
 /******************************/
 //Author: Lachlan Marler | C3351542
 //Course: SENG1120
-//Class Description: 
+//Class Description: This class dynamicaly stores nodes. Nodes are added to the tail of the LinkedList.
 
 #include "LinkedList.h"
 #include "Node.h"
@@ -21,15 +21,26 @@ LinkedList::LinkedList()
 
 LinkedList::~LinkedList()
 {
+	reset(); // sets current to head
 
+	for(int i = 0; i < size; i++) // traverses list and deletes nodes
+	{
+		Node* next = current->getNext();
+		delete current;
+		current = next; 
+	}
 }
 
+
+// resets the current pointer to the head of the LinkedList
 void LinkedList::reset()
 {
 	current = head;
 }
 
-void LinkedList::addToTail(valueType toAdd)
+
+// adds a valueType to the tail of the LinkedList
+void LinkedList::addToTail(const valueType toAdd)
 {
 
 	if (size == 0) // if there are no other nodes
@@ -55,7 +66,9 @@ void LinkedList::addToTail(valueType toAdd)
 
 }
 
-void LinkedList::add(valueType toAdd)
+
+// adds a each word of a sentence into the tail of the LinkedList
+void LinkedList::add(const valueType toAdd)
 {
 
 	std::istringstream ss(toAdd);
@@ -75,30 +88,40 @@ void LinkedList::add(valueType toAdd)
 
 }
 
-LinkedList::valueType LinkedList::getCurrentData()
+
+// Returns the data held in the current Node
+LinkedList::valueType LinkedList::getCurrentData() const
 {
 	return current->getData();
 }
 
+
+// moves the current pointer to the next Node
 void LinkedList::nextCurrent()
 {
 	current = current->getNext();
 }
 
+
+// moves the current pointer to the prev Node
 void LinkedList::prevCurrent()
 {
 	current = current->getPrev();
 }
 
+
+// test to see if current is at the end of the LinkedList
 bool LinkedList::atEnd() const
 {
-	if (current->getNext() == NULL)
+	if (current == NULL)
 		return true;
 	else
 		return false;
 }
 
-void LinkedList::remove(valueType toRemove)
+
+//Removes all the valueType the match a given valueType
+void LinkedList::remove(const valueType toRemove)
 {
 	reset(); // sets the current pointer to the head of the linked list
 
@@ -110,24 +133,56 @@ void LinkedList::remove(valueType toRemove)
 
 		if (current->getData() == toRemove) // if search is a match delete node
 			{
-				Node* nodeDelete = current; // store the location of the node to be delete.
+				
+				if(current == head ) // if the data being removed is at the head of the linked list
+				{
+					Node* nodeDelete = current; // location of the node being deleted
 
-				current = current->getPrev(); // move back in the list 
+					nextCurrent(); // move current to next Node
 
-				current->setNext(nodeDelete->getNext()); // remove the link between the current node and the node to be deleted
+					current->setPrev(NULL); // point the new head prev to NULL
 
-				current = current->getNext(); // move forward in the list | Note: nodeDelete will be skipped cause the link was removed above
+					head = current; // move the head to the new start of the LinkedList
 
-				current->setPrev(nodeDelete->getPrev()); // remove the link between the current node and the node to be delete | the node has now been removed from list
+					delete nodeDelete; // deallocate the memory assigned to the node
+				}
+				else if (current == tail) // if the data being removed is at the tail of the linked list
+				{
+					Node* nodeDelete = current; // location of the node being deleted
 
-				delete nodeDelete; // deallocate the memory assigned to the node
+					prevCurrent(); // move current to prev Node
 
+					current->setNext(NULL); // point the new tail next to NULL
+
+					tail = current; // move the tail to the new end of the LinkedList
+					
+					delete nodeDelete; // deallocate the memory assigned to the node
+				}
+				
+				else
+				{
+
+					Node* nodeDelete = current; // store the location of the node to be delete.
+
+					prevCurrent(); // move back in the list 
+
+					current->setNext(nodeDelete->getNext()); // remove the link between the current node and the node to be deleted
+
+					nextCurrent(); // move forward in the list | Note: nodeDelete will be skipped cause the link was removed above
+
+					current->setPrev(nodeDelete->getPrev()); // remove the link between the current node and the node to be delete | the node has now been removed from list
+
+					delete nodeDelete; // deallocate the memory assigned to the node
+
+				}
+				
+				
 				ammountRemoved++; // store the size decrease of the linked list
 
 			}
 			else // contine to the next node
 			{
-				current = current->getNext(); 
+				nextCurrent(); 
 			}
 			
 	}
@@ -135,52 +190,40 @@ void LinkedList::remove(valueType toRemove)
 	size -= ammountRemoved;
 }
 
+
+// Sorts the LinkedList use a bubblesort
 void LinkedList::sort()
 {
 	bool swapped;
 
+
 	reset(); // set current to head
 
-	for(int i = 0; i < size; i++) // for each item in the list
+	for(int i = 0; i < (size - 1); i++) // for each item in list
 	{
-
-		Node* l = current->getNext(); // points to current->getNext() B
-		Node* j = l->getNext(); // points to l->getNext(); C
-		Node* k = current->getPrev(); // points to current->getPrev 
-		
-		if(l != NULL)
-			if(current->getData() > l->getData()) //if current next is larger then current swap them
-			{
+		Node* tmp = current->getNext();
 
 
-				if (k == NULL) // checks if k needs to be linked back
-				{
-					l->setPrev(NULL);
-				}
-				else // link back
-				{
-					l->setPrev(k);
-					k->setNext(l);
-				}
-				
-				current->setPrev(l);
-				l->setNext(current);
 
-				if (j == NULL) // checks if j needs to be linked back
-				{
-					current->setNext(NULL);
-				}
-				else // link back
-				{
-					current->setNext(j);
-					j->setPrev(current);
-				}
-				
-				swapped = true;
-			}
+		if(current->getData() > tmp->getData()) // if current is larger then temp swap them
+		{
 
-		current = current->getNext();
+
+			valueType tmpData = current->getData();
+
+			//swap
+			current->setData(tmp->getData());
+			tmp->setData(tmpData);
+
+			swapped = true; // set swap to true
+
+		}
+
+		nextCurrent();
 	}
+
+
+
 
 
 	if (swapped) // if an item was swapped run sort again.
@@ -189,7 +232,9 @@ void LinkedList::sort()
 
 }
 
-int LinkedList::count(valueType toCount)
+
+// counts how many occurances of a give valueType their is in the LinkedList.
+int LinkedList::count(const valueType toCount)
 {
 	reset(); // set current to head
 	
@@ -200,13 +245,15 @@ int LinkedList::count(valueType toCount)
 			if(current->getData() == toCount) // if search matches
 				i++; // increment count
 
-			current = current->getNext(); // move to next node
+			nextCurrent(); // move to next node
 		}
 
 	
 	return	i; // return counted ammount
 }
 
+
+// operator overload to add two LinkedList together.
 void LinkedList::operator +=(LinkedList& ll)
 {
 	//ensure the LL current pointers are at the head
@@ -223,6 +270,8 @@ void LinkedList::operator +=(LinkedList& ll)
 
 }
 
+
+// Places the data within all the nodes into a single string.
 LinkedList::valueType LinkedList::out()
 {
 	valueType output;
@@ -233,13 +282,15 @@ LinkedList::valueType LinkedList::out()
 
 		//std::cout << current << " " << current->getData() << " " <<  i << std::endl;
 		output.append( current->getData() + " " );
-		current = current->getNext();
+		nextCurrent();
 
 	}
 	
 	return output;
 }
 
+
+// Outputs all the data in the nodes.
 std::ostream& operator <<(std::ostream& os, LinkedList& p)
 {
 	p.reset();
@@ -247,3 +298,4 @@ std::ostream& operator <<(std::ostream& os, LinkedList& p)
 	os << p.out();
 	return os;
 }
+

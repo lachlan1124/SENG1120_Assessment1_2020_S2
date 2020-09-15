@@ -22,27 +22,17 @@ class LinkedList
 
         // Precondition.
         // Postcondition.
-        void add(valueType toAdd);
+        void add(const valueType toAdd);
 
-        void addToTail(valueType toAdd);
-
-        void remove(valueType toRemove);
+        void remove(const valueType toRemove);
 
         void sort();
 
-        int count(valueType toCount);
-
-        void reset();
+        int count(const valueType toCount);
 
         valueType out();
+        void reset();
 
-        valueType getCurrentData();
-
-        void nextCurrent();
-
-        void prevCurrent();
-
-        bool atEnd() const;
 
         // Operator Overloads:
         void operator +=( LinkedList& ll);
@@ -56,8 +46,15 @@ class LinkedList
 
         int size;
 
+        bool atEnd() const;
+
+        void addToTail(const valueType toAdd);
+
+        void nextCurrent();
+
+        void prevCurrent();
         
-        
+        valueType getCurrentData() const;
 };
 
 
