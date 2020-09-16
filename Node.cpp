@@ -2,7 +2,8 @@
 /******************************/
 //Author: Lachlan Marler | C3351542
 //Course: SENG1120
-//Class Description: 
+//Class Description: This class stores a valueType in data and then two points to Nodes. 
+// It is desgined to be useded as the Node for a doublely LinkedList
 
 #include "Node.h"
 

@@ -2,7 +2,8 @@
 /******************************/
 //Author: Lachlan Marler | C3351542
 //Course: SENG1120
-//Class Description: 
+//Class Description: This class dynamicaly stores nodes. Nodes are added to the tail of the LinkedList.
+// This is a double linkedlist meaning that each node stores the next and prev data.
 
 #ifndef GAURD_LINKEDLIST
 #define GAURD_LINKEDLIST
