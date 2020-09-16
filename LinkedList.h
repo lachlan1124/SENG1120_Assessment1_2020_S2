@@ -24,7 +24,7 @@ class LinkedList
         // Postcondition: each word within the string is added to a Node within the LinkedList
         void add(const std::string toAdd);
 
-        // Precondition: 
+        // Precondition: atleast one Node exists
         // Postcondition: Removes all data that matches the given data
         void remove(const valueType toRemove);
 
@@ -60,23 +60,23 @@ class LinkedList
 
         int size;
 
-        // Precondition: 
+        // Precondition: none
         // Postcondition: returns true if the current pointer points to NULL.
         bool atEnd() const;
 
-        // Precondition: 
+        // Precondition: the data to add is given
         // Postcondition: A valueType is added to the end of the LinkedList
         void addToTail(const valueType toAdd);
 
-        // Precondition: 
+        // Precondition: none
         // Postcondition: the current pointer is moved to the next Node
         void nextCurrent();
 
-        // Precondition: 
+        // Precondition: none
         // Postcondition: the current pointer to moved to the prev Node
         void prevCurrent();
         
-        // Precondition: 
+        // Precondition: Current is not NULL
         // Postcondition: the data store in the Node current points to is returned
         valueType getCurrentData() const;
 };

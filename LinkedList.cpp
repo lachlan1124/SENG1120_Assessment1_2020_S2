@@ -131,7 +131,7 @@ void LinkedList::remove(const valueType toRemove)
 
 	int ammountRemoved = 0;
 
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < size; i++) // for each item in list
 	{
 		
 
@@ -186,12 +186,12 @@ void LinkedList::remove(const valueType toRemove)
 			}
 			else // contine to the next node
 			{
-				nextCurrent(); 
+				nextCurrent(); // increment the LinkedList
 			}
 			
 	}
 
-	size -= ammountRemoved;
+	size -= ammountRemoved; // reduce the size of the list by the ammount of items removed
 }
 
 
@@ -203,7 +203,7 @@ void LinkedList::sort()
 
 	reset(); // set current to head
 
-	for(int i = 0; i < (size - 1); i++) // for each item in list
+	for(int i = 0; i < (size - 1); i++) // for each item in list excpeted the last item
 	{
 		Node* tmp = current->getNext();
 
@@ -281,7 +281,7 @@ LinkedList::valueType LinkedList::out()
 	valueType output;
 
 
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < size; i++) // for each item in list
 	{
 
 		//std::cout << current << " " << current->getData() << " " <<  i << std::endl;
